@@ -92,7 +92,7 @@
       nixosModules.pint =
         { pkgs, ... }:
         {
-          environment.systemPackages = [ self.packages.${system}.pint ];
+          environment.systemPackages = [ self.defaultPackage ];
         };
     };
 }
