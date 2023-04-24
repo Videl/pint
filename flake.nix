@@ -90,9 +90,10 @@
 
       # A NixOS module, if applicable (e.g. if the package provides a system service).
       nixosModules.pint =
+
         { pkgs, ... }:
         {
-          environment.systemPackages = [ self.defaultPackage ];
+          environment.systemPackages = [ self.packages.${system}.pint ];
         };
     };
 }
