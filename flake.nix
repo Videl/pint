@@ -65,7 +65,8 @@
             # proxyVendor = true;
             vendorSha256 = "sha256-5ohRDAcITJDrCEVRnc1uAcNzJwklw7Mxe6YtsrbIB9Q=";
 
-            nativeBuildInputs = [ nixpkgs.curl ];
+            # Needed for running the tests
+            nativeBuildInputs = with pkgs; [ curl perl git ];
           };
         });
 
@@ -86,3 +87,4 @@
       defaultPackage = forAllSystems (system: self.packages.${system}.go-hello);
     };
 }
+
