@@ -37,10 +37,11 @@
             # In 'nix develop', we don't need a copy of the source tree
             # in the Nix store.
             src = ./.;
-            modRoot = "cmd";
-            preBuild = ''
-              go mod vendor
-            '';
+            subPackages = [ "cmd/pint" ];
+            # modRoot = "cmd";
+            # preBuild = ''
+            #   go mod vendor
+            # '';
             ldflags = [
               "-s"
               "-w"
@@ -62,7 +63,9 @@
             # vendorHash = null;
 
             # proxyVendor = true;
-            vendorSha256 = "sha256-PPTn8cmy4qTy04G9UFacs7TRhofBhIL7vQW8q8Y0OsI=";
+            vendorSha256 = "sha256-5ohRDAcITJDrCEVRnc1uAcNzJwklw7Mxe6YtsrbIB9Q=";
+
+            nativeBuildInputs = [ nixpkgs.curl ];
           };
         });
 
