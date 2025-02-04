@@ -4,9 +4,12 @@
   # Nixpkgs / NixOS version to use.
   inputs.nixpkgs.url = "nixpkgs/nixos-unstable";
 
-  outputs = { self, nixpkgs }:
+  outputs =
+    { self
+    , nixpkgs
+    ,
+    }:
     let
-
       # to work with older version of flakes
       lastModifiedDate = self.lastModifiedDate or self.lastModified or "19700101";
 
@@ -21,10 +24,8 @@
 
       # Nixpkgs instantiated for supported system types.
       nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
-
     in
     {
-
       # Provide some binary packages for selected system types.
       packages = forAllSystems (system:
         let
@@ -60,10 +61,10 @@
             # remeber to bump this hash when your dependencies change.
             # vendorSha256 = pkgs.lib.fakeSha256;
 
-            # vendorHash = null;
+            vendorHash = "sha256-OgPBGIjyq/hn8yTGlvBbZCEBTV5tZNP2qCLUNFKmDNI=";
 
             # proxyVendor = true;
-            vendorSha256 = "sha256-5ohRDAcITJDrCEVRnc1uAcNzJwklw7Mxe6YtsrbIB9Q=";
+            # vendorSha256 = "sha256-5ohRDAcITJDrCEVRnc1uAcNzJwklw7Mxe6YtsrbIB9Q=";
 
             # Needed for running the tests
             nativeBuildInputs = with pkgs; [ curl perl git ];
@@ -86,8 +87,6 @@
       # package.
       defaultPackage = forAllSystems (system: self.packages.${system}.pint);
 
-
-
       # A NixOS module, if applicable (e.g. if the package provides a system service).
       #   nixosModules.pint =
       #
@@ -97,4 +96,3 @@
       #     };
     };
 }
-
